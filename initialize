@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+mkdir -p ~/.cloudshell 2>/dev/null || true
+touch ~/.cloudshell/no-apt-get-warning
+
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+
+# keep docker components in sync; don't allow version drift
+sudo apt-get install docker-engine=1.13.0 -y
+curl -sL https://github.com/docker/machine/releases/download/v0.9.0/docker-machine-`uname -s`-`uname -m` > /tmp/docker-machine
+chmod +x /tmp/docker-machine
+sudo mv /tmp/docker-machine /usr/local/bin/docker-machine
+curl -sL https://github.com/docker/compose/releases/download/1.10.0/docker-compose-`uname -s`-`uname -m` > /tmp/docker-compose
+chmod +x /tmp/docker-compose
+sudo mv /tmp/docker-compose /usr/local/bin/docker-compose
