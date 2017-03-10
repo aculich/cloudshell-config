@@ -11,7 +11,14 @@ pip3 install --user asciinema
 
 cat >> ~/.bashrc <<EOF
 export PATH=\$HOME/.local/bin:\$PATH
+
+## change shell prompt when recording with asciinema
+if [ "\$SHLVL" -gt 1 ]; then
+  export PS1="demo@cloudshell:\w\$ "
+fi
+
 EOF
+
 
 ## # keep docker components in sync; don't allow version drift
 ## sudo apt-get install docker-engine=1.13.0 -y
